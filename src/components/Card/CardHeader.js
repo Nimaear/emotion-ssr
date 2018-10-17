@@ -1,6 +1,5 @@
 //@flow
 import styled from '@emotion/styled';
-import { createComponent } from 'util';
 import {
   space,
   display,
@@ -18,8 +17,8 @@ import {
   alignSelf,
 } from 'styled-system';
 
-const CardHeader = createComponent(styled.h2`
-  padding: ${(props) => console.log(props.theme)}px;
+const CardHeader = styled('h2')`
+  padding: ${(props) => props.theme.padding}px;
   ${space};
   ${display};
   ${borderRadius};
@@ -34,6 +33,6 @@ const CardHeader = createComponent(styled.h2`
   ${flex};
   ${justifySelf};
   ${alignSelf};
-`);
+`;
 
 export default CardHeader;

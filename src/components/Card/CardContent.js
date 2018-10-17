@@ -1,6 +1,5 @@
 //@flow
-import styled from 'react-emotion';
-import { createComponent } from 'util';
+import styled from '@emotion/styled';
 import {
   space,
   color,
@@ -24,7 +23,7 @@ import {
   alignSelf,
 } from 'styled-system';
 
-const CardContent = createComponent(styled.div`
+const CardContent = styled.div`
   padding: 8px 16px;
   ${space};
   ${width};
@@ -46,6 +45,6 @@ const CardContent = createComponent(styled.div`
   ${flex};
   ${justifySelf};
   ${alignSelf};
-`);
+`;
 
 export default CardContent;

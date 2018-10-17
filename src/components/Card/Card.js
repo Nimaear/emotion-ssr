@@ -1,6 +1,5 @@
 //@flow
 import styled from '@emotion/styled';
-import { createComponent } from 'util';
 import CardContent from './CardContent';
 import CardImage from './CardImage';
 import CardHeader from './CardHeader';
@@ -28,7 +27,7 @@ import {
   alignSelf,
 } from 'styled-system';
 
-const Card = createComponent(styled('div')`
+const Card = styled('div')`
   transition: 0.3;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   min-height: 64px;
@@ -62,7 +61,7 @@ const Card = createComponent(styled('div')`
   ${flex};
   ${justifySelf};
   ${alignSelf};
-`);
+`;
 
 Card.Content = CardContent;
 Card.Header = CardHeader;

@@ -9,49 +9,12 @@ const clientConfig = require('../webpack/client.dev');
 const serverConfig = require('../webpack/server.dev');
 const clientConfigProd = require('../webpack/client.prod');
 const serverConfigProd = require('../webpack/server.prod');
-const pino = require('express-pino-logger')();
-const bodyParser = require('body-parser');
-const session = require('express-session');
 
 const { publicPath } = clientConfig.output;
 const outputPath = clientConfig.output.path;
 const DEV = process.env.NODE_ENV === 'development';
 const app = express();
 app.use(noFavicon());
-app.use(bodyParser.json());
-app.use(
-  session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false },
-  })
-);
-app.use((req, res, next) => {
-  if (!req.session.user) {
-    req.session.user = {
-      viewMode: 'normal',
-    };
-  }
-  next();
-});
-
-app.use('/api/settings', (req, res) => {
-  try {
-    const { settings } = req.body;
-    req.session.user = {
-      ...req.session.user,
-      ...settings,
-    };
-    res.json({
-      settings: req.session.user,
-    });
-  } catch (e) {
-    res.json({
-      error: e.message,
-    });
-  }
-});
 
 let isBuilt = false;
 
@@ -68,7 +31,6 @@ if (DEV) {
   const options = { publicPath, stats: { colors: true } };
   const devMiddleware = webpackDevMiddleware(compiler, options);
 
-  // app.use(pino);
   app.use(devMiddleware);
   app.use(webpackHotMiddleware(clientCompiler));
   app.use(webpackHotServerMiddleware(compiler));
